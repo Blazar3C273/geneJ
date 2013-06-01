@@ -5,10 +5,16 @@
  * 30.05.2013
  * TODO
  */
-package geneJ;
+package ru.Blazar3C273.geneJ.GeneticOperators;
+
 
 import java.util.Arrays;
 import java.util.Random;
+
+import ru.Blazar3C273.geneJ.FitnessFunction;
+import ru.Blazar3C273.geneJ.GeneticOperator;
+import ru.Blazar3C273.geneJ.Population;
+import ru.Blazar3C273.geneJ.FitnessFunctions.Roulette;
 
 /**
  * 

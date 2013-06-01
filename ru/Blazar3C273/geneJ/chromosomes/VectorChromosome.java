@@ -1,7 +1,11 @@
-package geneJ;
+package ru.Blazar3C273.geneJ.chromosomes;
+
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import ru.Blazar3C273.geneJ.Chromosome;
+import ru.Blazar3C273.geneJ.FitnessFunction;
 
 /**
  * @author Stepanenko Anatoliy

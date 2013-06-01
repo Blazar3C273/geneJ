@@ -5,10 +5,17 @@
  * 23.05.2013
  * TODO
  */
-package geneJ;
+package ru.Blazar3C273.geneJ.GeneticOperators;
+
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import ru.Blazar3C273.geneJ.Chromosome;
+import ru.Blazar3C273.geneJ.GeneticOperator;
+import ru.Blazar3C273.geneJ.Population;
+import ru.Blazar3C273.geneJ.chromosomes.Gen;
+
 
 /**
  * 

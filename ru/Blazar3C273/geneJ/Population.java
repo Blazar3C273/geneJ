@@ -1,8 +1,14 @@
-package geneJ;
+package ru.Blazar3C273.geneJ;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+
+import ru.Blazar3C273.geneJ.chromosomes.BinChromosome;
+import ru.Blazar3C273.geneJ.chromosomes.IntChromosome;
+import ru.Blazar3C273.geneJ.chromosomes.VectorChromosome;
+
 
 /**
  * @author Stepanenko Anatoliy
@@ -70,7 +76,7 @@ public class Population {
 				+ "\n"; 	
 	}
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
+	public Object clone() throws CloneNotSupportedException {
 		//super.clone();
 		Population ret = new Population(persons);
 		ret.generationCount = generationCount;

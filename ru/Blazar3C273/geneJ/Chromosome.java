@@ -1,6 +1,10 @@
-package geneJ;
+package ru.Blazar3C273.geneJ;
+
 import java.util.ArrayList;
 import java.util.Random;
+
+import ru.Blazar3C273.geneJ.chromosomes.Gen;
+
 
 /**
  * @author Stepanenko Anatoliy
@@ -49,7 +53,7 @@ public abstract class Chromosome implements Fitnessable  {
 	public abstract ArrayList<Chromosome> generateSomeChromosomes(int quantity,int chromosomeSize,Random random,Chromosome sample);
 	
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
+	public Object clone() throws CloneNotSupportedException {
 		Chromosome ret = null;
 		try {
 			ret = this.getClass().newInstance();

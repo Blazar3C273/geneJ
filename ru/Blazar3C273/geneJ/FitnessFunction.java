@@ -5,7 +5,7 @@
  * 16.05.2013
  * TODO
  */
-package geneJ;
+package ru.Blazar3C273.geneJ;
 
 /**
  * 

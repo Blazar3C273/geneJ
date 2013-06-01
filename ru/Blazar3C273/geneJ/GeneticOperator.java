@@ -1,11 +1,5 @@
-package geneJ;
-/**
- * @author Stepanenko Anatoliy
- * Lab1EvM&GA
- * 19:33:49
- * 10.05.2013
- * TODO
- */
+package ru.Blazar3C273.geneJ;
+
 
 /**
  * 

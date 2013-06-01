@@ -1,6 +1,9 @@
-package geneJ;
+package ru.Blazar3C273.geneJ;
 import java.util.ArrayList;
 import java.util.Random;
+
+import ru.Blazar3C273.geneJ.Exeptions.WrongFocusBand;
+
 
 public abstract class PopulationFactory {
 

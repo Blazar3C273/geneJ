@@ -1,12 +1,14 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-import geneJ.BinChromosome;
-import geneJ.Chromosome;
-import geneJ.Crossingover;
-import geneJ.GeneticOperator;
-import geneJ.Population;
-import geneJ.PopulationFactory;
+
+import ru.Blazar3C273.geneJ.Chromosome;
+import ru.Blazar3C273.geneJ.GeneticOperator;
+import ru.Blazar3C273.geneJ.Population;
+import ru.Blazar3C273.geneJ.PopulationFactory;
+import ru.Blazar3C273.geneJ.GeneticOperators.Crossingover;
+import ru.Blazar3C273.geneJ.chromosomes.BinChromosome;
+
 
 /**
  * @author Stepanenko Anatoliy

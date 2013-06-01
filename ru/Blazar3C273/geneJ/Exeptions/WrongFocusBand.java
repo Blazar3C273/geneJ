@@ -1,4 +1,4 @@
-package geneJ;
+package ru.Blazar3C273.geneJ.Exeptions;
 /**
  * @author Stepanenko Anatoliy
  * Lab1EvM&GA

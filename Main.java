@@ -1,15 +1,17 @@
-import geneJ.BinChromosome;
-import geneJ.Chromosome;
-import geneJ.IntChromosome;
-import geneJ.Population;
-import geneJ.PopulationFactory;
-import geneJ.VectorChromosome;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Random;
 import java.util.Scanner;
+
+import ru.Blazar3C273.geneJ.Chromosome;
+import ru.Blazar3C273.geneJ.Population;
+import ru.Blazar3C273.geneJ.PopulationFactory;
+import ru.Blazar3C273.geneJ.chromosomes.BinChromosome;
+import ru.Blazar3C273.geneJ.chromosomes.IntChromosome;
+import ru.Blazar3C273.geneJ.chromosomes.VectorChromosome;
+
 
 /**
  * @author Stepanenko Anatoliy

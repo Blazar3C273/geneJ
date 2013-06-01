@@ -1,7 +1,7 @@
-package geneJ;
+package ru.Blazar3C273.geneJ.chromosomes;
 
 public abstract class Gen<T> {
-	protected T value;
+	public T value;
 	public T getValue() {
 		return value;
 	}
