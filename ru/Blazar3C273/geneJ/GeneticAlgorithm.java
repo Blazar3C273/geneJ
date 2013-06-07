@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.Random;
 
 
+import ru.Blazar3C273.geneJ.Exeptions.WrongArgumentsExeption;
 import ru.Blazar3C273.geneJ.FitnessFunctions.SympleSumFitness;
 import ru.Blazar3C273.geneJ.GeneticOperators.Crossingover;
 import ru.Blazar3C273.geneJ.GeneticOperators.Mutation;
@@ -35,7 +36,12 @@ public class GeneticAlgorithm {
 		System.out.println(currentPopulation);
 		ArrayList<GeneticOperator> operatorArray = new ArrayList<GeneticOperator>();
 		operatorArray.add(new Mutation().initialize(random, 0.7));
-		operatorArray.add(new Crossingover().initialize(random, random));
+		try {
+			operatorArray.add(new Crossingover().initialize(random, random));
+		} catch (WrongArgumentsExeption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		operatorArray.add(new Reproduction().initialize(random,
 				new SympleSumFitness()));
 		Population localFindSolution = new GeneticAlgorithm().findSolution(1000000, 10000000, 9000, currentPopulation, operatorArray, random);

@@ -8,6 +8,7 @@ import java.util.Random;
 import ru.Blazar3C273.geneJ.Chromosome;
 import ru.Blazar3C273.geneJ.GeneticOperator;
 import ru.Blazar3C273.geneJ.Population;
+import ru.Blazar3C273.geneJ.Exeptions.WrongArgumentsExeption;
 import ru.Blazar3C273.geneJ.chromosomes.Gen;
 
 
@@ -92,10 +93,11 @@ public class Crossingover implements GeneticOperator {
 
 	/**
 	 * @return 
+	 * @throws WrongArgumentsExeption 
 	 * @params определяют точку кроссинговера. int ждолжен принадлежать множеству 1,L-1, где L длинна хромосомы || Random
 	 * */
 	@Override
-	public GeneticOperator initialize(Object... params) {
+	public GeneticOperator initialize(Object... params) throws WrongArgumentsExeption {
 		assert (params[0].getClass() == int.class ||params[0].getClass().equals(Random.class)) : params[0]
 				.getClass().getName() + "Wrond aruments type";
 		// TODO
@@ -107,7 +109,7 @@ public class Crossingover implements GeneticOperator {
 			isRandom = true;
 			rnd = (Random) params[0];
 		} else {
-			// TODO throw exeption
+			throw new WrongArgumentsExeption(params[0].getClass().getName() + "Wrond aruments type");
 		}
 		return this;
 	}
