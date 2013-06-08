@@ -6,7 +6,7 @@ import ru.Blazar3C273.geneJ.GeneticOperator;
 import ru.Blazar3C273.geneJ.Population;
 import ru.Blazar3C273.geneJ.PopulationFactory;
 import ru.Blazar3C273.geneJ.Exeptions.WrongArgumentsExeption;
-import ru.Blazar3C273.geneJ.GeneticOperators.UniversalCrossingover;
+import ru.Blazar3C273.geneJ.GeneticOperators.NPointsCrossingover;
 import ru.Blazar3C273.geneJ.chromosomes.Gen;
 import ru.Blazar3C273.geneJ.chromosomes.IntChromosome;
 
@@ -66,7 +66,7 @@ public class Lab2 {
 	GeneticOperator operator;
 	try {
 		
-		operator = new UniversalCrossingover().initialize(random, QUANTITY_OF_CROSSINGOVER_POINTS);
+		operator = new NPointsCrossingover().initialize(random, QUANTITY_OF_CROSSINGOVER_POINTS);
 		System.out.println(operator.executeOperator(population));
 		operator.initialize(random,new Integer(3));
 		System.out.println(operator.executeOperator(population));

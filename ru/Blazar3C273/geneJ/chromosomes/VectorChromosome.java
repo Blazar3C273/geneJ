@@ -32,7 +32,7 @@ public class VectorChromosome extends Chromosome implements Comparable<VectorChr
 		setGenom(new ArrayList<Gen<?>>());
 		for (int i = 0; i < paramChromosomeSize; i++) {
 			Gen<Chromosome> gen = new Gen<Chromosome>(){};
-			gen.setValue(inChromosomeSample.generateSomeChromosomes(1, paramChromosomeSize, paramRandom, null).get(0));
+			gen.setValue(inChromosomeSample.generateSomeChromosomes(1, paramChromosomeSize, paramRandom, inChromosomeSample).get(0));
 			getGenom().add(gen);
 		}
 

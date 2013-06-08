@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -12,7 +11,6 @@ import ru.Blazar3C273.geneJ.chromosomes.BinChromosome;
 import ru.Blazar3C273.geneJ.chromosomes.IntChromosome;
 import ru.Blazar3C273.geneJ.chromosomes.VectorChromosome;
 
-
 /**
  * @author Stepanenko Anatoliy
  * Lab1EvM&GA
@@ -22,14 +20,14 @@ import ru.Blazar3C273.geneJ.chromosomes.VectorChromosome;
  */
 
 /**
- * 
+ * Ћабораторна€ работа є 1 по курсу ЂЁволюционное моделирование и генетические
+ * алгоритмыї Ђќсновные положени€ теории генетического поискаї
  */
 public class Lab1 {
 
 	private static final int CHROMOSOME_DEF_SIZE = 10;
 	private static final Random RANDOM = new Random();
 	private static final int VOLUME_OF_ACCESEBLE_SOLUTION_SPACE = 100;
-	private static final int CHROMOSOME_SIZE = 10;
 	private static boolean flag = false;
 
 	/**
@@ -46,24 +44,11 @@ public class Lab1 {
 		// Evolute them
 		makeCreationDemo();
 		makeChromosome();
-		evolute();
-		drowGraphs();
-
-	}
-
-	private static void evolute() {
-		// TODO Auto-generated method stub
-
-	}
-
-	private static void drowGraphs() {
-		// TODO Auto-generated method stub
-
 	}
 
 	private static void makeChromosome() {
 		System.out
-				.println("¬ыберите тип создавамой хромосомы:1-Int 2-Bin 3-vector int 4-vector bin");
+				.println("¬ыберите тип создаваемой хромосомы:1-Int 2-Bin 3-vector int 4-vector bin");
 		Chromosome chromosome;
 		Scanner in = new Scanner(System.in);
 		flag = false;
@@ -86,7 +71,7 @@ public class Lab1 {
 				}
 				case 3: {
 					chromosome = new VectorChromosome(CHROMOSOME_DEF_SIZE,
-							RANDOM, new VectorChromosome(CHROMOSOME_DEF_SIZE, RANDOM, new IntChromosome()));
+							RANDOM, new IntChromosome());
 					System.out.print("\n—одержимое созданной хромосомы: "
 							+ chromosome.toString());
 					flag = true;
@@ -94,7 +79,7 @@ public class Lab1 {
 				}
 				case 4: {
 					chromosome = new VectorChromosome(CHROMOSOME_DEF_SIZE,
-							RANDOM, new VectorChromosome(CHROMOSOME_DEF_SIZE, RANDOM, new BinChromosome()));
+							RANDOM, new BinChromosome());
 					System.out.print("\n—одержимое созданной хромосомы: "
 							+ chromosome.toString());
 					flag = true;
@@ -119,7 +104,7 @@ public class Lab1 {
 				int border1, border2;
 				long time;
 				Scanner in = new Scanner(System.in);
-				Chromosome chromosome;
+				Population pop;
 				switch (in.nextInt()) {
 				case 1:
 					System.out.println("¬ведите размер попул€ции:");
@@ -127,27 +112,26 @@ public class Lab1 {
 					if (size < 0) {
 						throw new IOException();
 					}
-					System.out.println("¬ведите 1 границу:");
+					System.out.println("¬ведите 1 границу 0-100 :");
 					border1 = in.nextInt();
 					if (size < 0) {
 
 						throw new IOException();
 					}
-					System.out.println("¬ведите 2 границу:");
+					System.out.println("¬ведите 2 границу 0-100 :");
 					border2 = in.nextInt();
 					if (size < 0) {
 						throw new IOException();
 					}
 
 					time = GregorianCalendar.getInstance().getTime().getTime();
-					ArrayList<Chromosome> solutionSpaceBIN = new ArrayList<Chromosome>();
-					for (int i = 0; i < VOLUME_OF_ACCESEBLE_SOLUTION_SPACE; i++) {
-						solutionSpaceBIN.add(new BinChromosome(CHROMOSOME_SIZE,
-								RANDOM));
-					}
-					Population pop = PopulationFactory
-							.generatePopulationByFocusMethod(RANDOM,
-									solutionSpaceBIN, size, border1, border2);
+					ArrayList<Chromosome> solutionSpaceBIN = new BinChromosome()
+							.generateSomeChromosomes(
+									VOLUME_OF_ACCESEBLE_SOLUTION_SPACE,
+									CHROMOSOME_DEF_SIZE, RANDOM,
+									new BinChromosome());
+					pop = PopulationFactory.generatePopulationByFocusMethod(
+							RANDOM, solutionSpaceBIN, size, border1, border2);
 					time -= GregorianCalendar.getInstance().getTime().getTime();
 					System.out.println("—оздание бинарной попул€ции размера "
 							+ size + " зан€ло  " + -time + " микросекунд\n");
@@ -155,19 +139,23 @@ public class Lab1 {
 					flag = true;
 					break;
 				case 2:
-					System.out.println("¬ведите размер хромосомы:");
+					System.out.println("¬ведите размер попул€ции:");
 					size = in.nextInt();
 					if (size < 0) {
 
 						throw new IOException();
 					}
 					time = GregorianCalendar.getInstance().getTime().getTime();
-					chromosome = new IntChromosome(size, RANDOM);
+					pop = PopulationFactory
+							.generatePopulationByBlanketMethod(new BinChromosome()
+									.generateSomeChromosomes(size,
+											CHROMOSOME_DEF_SIZE, RANDOM,
+											new BinChromosome()));
 					time -= GregorianCalendar.getInstance().getTime().getTime();
 					System.out
-							.println("—оздание целочисленной хромосомы размера зан€ло "
+							.println("—оздание целочисленной попул€ции зан€ло "
 									+ -time + " микросекунд\n");
-					System.out.println("\n " + chromosome);
+					System.out.println("\n " + pop);
 					flag = true;
 					break;
 
@@ -179,13 +167,17 @@ public class Lab1 {
 						throw new IOException();
 					}
 					time = GregorianCalendar.getInstance().getTime().getTime();
-					chromosome = new VectorChromosome(size, RANDOM,
-							new BinChromosome());
+
+					pop = PopulationFactory.generatePopulationByShotGunMethod(
+							RANDOM, new BinChromosome()
+									.generateSomeChromosomes(
+											VOLUME_OF_ACCESEBLE_SOLUTION_SPACE,
+											CHROMOSOME_DEF_SIZE, RANDOM,
+											new BinChromosome()), size);
 					time -= GregorianCalendar.getInstance().getTime().getTime();
-					System.out
-							.println("—оздание векторной хромосомы размера зан€ло "
-									+ -time + " микросекунд\n");
-					System.out.println("\n " + chromosome);
+					System.out.println("—оздание попул€ции зан€ло " + -time
+							+ " микросекунд\n");
+					System.out.println("\n " + pop);
 					flag = true;
 					break;
 				default:

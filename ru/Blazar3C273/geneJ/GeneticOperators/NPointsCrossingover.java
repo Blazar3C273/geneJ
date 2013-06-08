@@ -21,7 +21,7 @@ import ru.Blazar3C273.geneJ.chromosomes.Gen;
 /**
  * 
  */
-public class UniversalCrossingover implements GeneticOperator {
+public class NPointsCrossingover implements GeneticOperator {
 
 	private Random rnd;
 
