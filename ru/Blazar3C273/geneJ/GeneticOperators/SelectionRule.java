@@ -7,12 +7,13 @@
  */
 package ru.Blazar3C273.geneJ.GeneticOperators;
 
-import ru.Blazar3C273.geneJ.Chromosome;
+import java.util.Random;
+
 import ru.Blazar3C273.geneJ.Population;
 
 /**
  * 
  */
 public interface SelectionRule {
-	public abstract Chromosome[] getParetsPair(Population population); 
+	public abstract ParentsPairIterator iterator(Population _population, Random _rnd); 
 }

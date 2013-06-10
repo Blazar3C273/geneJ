@@ -6,6 +6,7 @@ import java.util.Random;
 
 import ru.Blazar3C273.geneJ.Chromosome;
 import ru.Blazar3C273.geneJ.GeneticOperator;
+import ru.Blazar3C273.geneJ.GeneticOperatorParams;
 import ru.Blazar3C273.geneJ.Population;
 import ru.Blazar3C273.geneJ.Exeptions.WrongArgumentsExeption;
 import ru.Blazar3C273.geneJ.chromosomes.Gen;
@@ -19,18 +20,36 @@ import ru.Blazar3C273.geneJ.chromosomes.Gen;
  */
 
 /**
- * 
+ * TODO косяк тут. число хромосом утроилось на первой итерации. Это правильно. родители + по 2 потомка к каждой паре.N пар,где n кол-во хромосом .
+ * TODO переписать выбор родителей. мб выполнять репродкцию тут же?
  */
-public class NPointsCrossingover implements GeneticOperator {
+public class NPointsCrossingover extends GeneticOperator {
 
+	public static class NPointsStrategy extends GeneticOperatorParams{
+		public Integer[] crossingoverPoints;
+
+		public NPointsStrategy(Random _inRnd,Integer[] _crossingoverPoits) {
+			super(_inRnd);
+			this.crossingoverPoints = _crossingoverPoits;
+		}
+			
+	}
+	public static class NRandomPointsStrategy extends GeneticOperatorParams{
+		public int quantityOfRandomCrossingoverPoints;
+		
+		public NRandomPointsStrategy(Random _inRnd,int _quantityOfCrossingoverPoits) {
+			super(_inRnd);
+			this.quantityOfRandomCrossingoverPoints = _quantityOfCrossingoverPoits;
+		}
+		
+	}
 	private Random rnd;
-
 	private enum STRATEGY_ENUM {
 		RANDOM_N_POINTS, N_POINTS
 	};
-
-	private STRATEGY_ENUM stategy;
-	private Integer[] points;
+	private static Integer[] points;
+	private static STRATEGY_ENUM stategy;
+	private static Integer quantityOfRandomCutPoits;
 
 	/*
 	 * (non-Javadoc)
@@ -43,9 +62,8 @@ public class NPointsCrossingover implements GeneticOperator {
 		ArrayList<Chromosome> paretns = paramInput.getPersons();
 
 		if (stategy == STRATEGY_ENUM.RANDOM_N_POINTS) {
-			Integer number = points[0];
-			points = new Integer[number];
-			for (int i = 0; i < number; i++) {
+			points = new Integer[quantityOfRandomCutPoits];
+			for (int i = 0; i < quantityOfRandomCutPoits; i++) {
 				points[i] = rnd.nextInt(paretns.get(0).getGenom().size());
 			}
 			Arrays.sort(points);
@@ -97,25 +115,21 @@ public class NPointsCrossingover implements GeneticOperator {
 	 * @see geneJ.GeneticOperator#initialize(java.lang.Object[])
 	 */
 	@Override
-	public GeneticOperator initialize(Object... params)
+	public GeneticOperator initialize(GeneticOperatorParams _inParams)
 			throws WrongArgumentsExeption {
-		assert (params[0].getClass() == Random.class && (params[1].getClass() == Integer[].class || params[1]
-				.getClass() == Integer.class)) : params[0].getClass().getName()
-				+ " "
-				+ params[1].getClass().getName()
-				+ "Wrond aruments type. Wolid be Random,(Integer[] if N points, non random Crossingover || Integer if N points random Crossingover)";
-		rnd = (Random) params[0];
-		if (params[1].getClass() == Integer.class) {
-			stategy = STRATEGY_ENUM.RANDOM_N_POINTS;
-			points = new Integer[] { (Integer) params[1] };
-		}else if (params[1].getClass() == Integer[].class) {
+		if (_inParams.getClass() == NPointsStrategy.class) {
 			stategy = STRATEGY_ENUM.N_POINTS;
-			points = (Integer[]) params[1];
+			points = ((NPointsStrategy) _inParams).crossingoverPoints;
+			rnd = _inParams.getRandom();
+		} else if (_inParams.getClass() == NRandomPointsStrategy.class) {
+			stategy = STRATEGY_ENUM.RANDOM_N_POINTS;
+			this.quantityOfRandomCutPoits =((NRandomPointsStrategy)_inParams).quantityOfRandomCrossingoverPoints;
+			rnd = _inParams.getRandom();
 		} else {
+			//TODO
 			String massegeString = "Wrond aruments type. Wolid be Random,(Integer[] if N points,"
 					+ " non random Crossingover || Integer if N points random Crossingover)";
-			throw new WrongArgumentsExeption(params[0].getClass().getName()
-					+ " " + params[1].getClass().getName() + massegeString);
+			throw new WrongArgumentsExeption(massegeString);
 		}
 		return this;
 	}

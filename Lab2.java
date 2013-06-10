@@ -5,11 +5,17 @@ import ru.Blazar3C273.geneJ.Chromosome;
 import ru.Blazar3C273.geneJ.GeneticOperator;
 import ru.Blazar3C273.geneJ.Population;
 import ru.Blazar3C273.geneJ.PopulationFactory;
+import ru.Blazar3C273.geneJ.Exeptions.OperatorNotInitializedException;
 import ru.Blazar3C273.geneJ.Exeptions.WrongArgumentsExeption;
 import ru.Blazar3C273.geneJ.GeneticOperators.NPointsCrossingover;
+import ru.Blazar3C273.geneJ.GeneticOperators.ParentsPairIterator;
+import ru.Blazar3C273.geneJ.GeneticOperators.SelectionRule;
+import ru.Blazar3C273.geneJ.GeneticOperators.UniversalCrossingover;
+import ru.Blazar3C273.geneJ.GeneticOperators.UniversalCrossingover.UniversalCrossingoverParams1;
+import ru.Blazar3C273.geneJ.GeneticOperators.UniversalCrossingover.UniversalCrossingoverParams2;
+import ru.Blazar3C273.geneJ.chromosomes.BinChromosome;
 import ru.Blazar3C273.geneJ.chromosomes.Gen;
 import ru.Blazar3C273.geneJ.chromosomes.IntChromosome;
-
 
 /**
  * @author Stepanenko Anatoliy
@@ -24,56 +30,140 @@ import ru.Blazar3C273.geneJ.chromosomes.IntChromosome;
  */
 public class Lab2 {
 
-	private static final Integer[] QUANTITY_OF_CROSSINGOVER_POINTS = new Integer[2];
-
-
-	/**
-	 * 
-	 */
-	public Lab2() {
-		// TODO Auto-generated constructor stub
-	}
+	private static Integer QUANTITY_OF_CROSSINGOVER_POINTS = 1;
 
 	/**
-	 * @param args
+ * @param args
+ */
+public static void main(String[] args) {
+	Random random = new Random();
+	/*
+	 * 1т 2т 3т унив
 	 */
-	public static void main(String[] args) {
-		Random random = new Random();
-		
-	ArrayList<Chromosome> parentChomosomes = new IntChromosome().generateSomeChromosomes(4, 10, random, new IntChromosome());
-	QUANTITY_OF_CROSSINGOVER_POINTS[0]=new Integer(3);
-	QUANTITY_OF_CROSSINGOVER_POINTS[1]=new Integer(7);
-	for (int i = 0; i < parentChomosomes.get(0).getGenom().size(); i++) {
-		Gen<Integer> localElement = new Gen<Integer>() {};
-		localElement.setValue(new Integer(1));
-		parentChomosomes.get(0).getGenom().set(i, localElement);		
-		
-		localElement = new Gen<Integer>() {};
-		localElement.setValue(new Integer(2));
-		parentChomosomes.get(1).getGenom().set(i, localElement);		
-		
-		localElement = new Gen<Integer>() {};
-		localElement.setValue(new Integer(3));
-		parentChomosomes.get(2).getGenom().set(i, localElement);		
-		
-		localElement = new Gen<Integer>() {};
-		localElement.setValue(new Integer(4));
-		parentChomosomes.get(3).getGenom().set(i, localElement);		
-	}
-	Population population =	PopulationFactory.generatePopulationByBlanketMethod(parentChomosomes);
-	//System.out.println();
+
+	ArrayList<Chromosome> parentChomosomes = new BinChromosome()
+			.generateSomeChromosomes(4, 10, random, new BinChromosome());
+	Population population = PopulationFactory
+			.generatePopulationByBlanketMethod(parentChomosomes);
 	System.out.println(population);
 	GeneticOperator operator;
 	try {
-		
-		operator = new NPointsCrossingover().initialize(random, QUANTITY_OF_CROSSINGOVER_POINTS);
+
+		operator = new NPointsCrossingover()
+				.initialize(new NPointsCrossingover.NRandomPointsStrategy(
+						random, QUANTITY_OF_CROSSINGOVER_POINTS));
 		System.out.println(operator.executeOperator(population));
-		operator.initialize(random,new Integer(3));
+
+		QUANTITY_OF_CROSSINGOVER_POINTS = 2;
+		parentChomosomes = new BinChromosome().generateSomeChromosomes(
+					4,10, random, new BinChromosome());
+		population = PopulationFactory
+				.generatePopulationByBlanketMethod(parentChomosomes);
+		operator = new NPointsCrossingover()
+				.initialize(new NPointsCrossingover.NRandomPointsStrategy(
+						random, QUANTITY_OF_CROSSINGOVER_POINTS));
+		System.out.println(population);
+		System.out.println(operator.executeOperator(population));
+
+		QUANTITY_OF_CROSSINGOVER_POINTS = 3;
+		parentChomosomes = new BinChromosome().generateSomeChromosomes(4,
+				10, random, new BinChromosome());
+		population = PopulationFactory
+				.generatePopulationByBlanketMethod(parentChomosomes);
+		operator = new NPointsCrossingover()
+				.initialize(new NPointsCrossingover.NRandomPointsStrategy(
+						random, QUANTITY_OF_CROSSINGOVER_POINTS));
+		operator = new NPointsCrossingover()
+				.initialize(new NPointsCrossingover.NRandomPointsStrategy(
+						random, QUANTITY_OF_CROSSINGOVER_POINTS));
+		System.out.println(population);
+		System.out.println(operator.executeOperator(population));
+
+		parentChomosomes = new BinChromosome().generateSomeChromosomes(4,
+				10, random, new BinChromosome());
+		population = PopulationFactory
+				.generatePopulationByBlanketMethod(parentChomosomes);
+
+		ArrayList<Boolean> _binaryMask = new ArrayList<Boolean>();
+		_binaryMask.add(true);
+		_binaryMask.add(true);
+		_binaryMask.add(true);
+		_binaryMask.add(!true);
+		_binaryMask.add(false);
+		_binaryMask.add(!true);
+		_binaryMask.add(!true);
+		_binaryMask.add(true);
+		_binaryMask.add(true);
+		_binaryMask.add(true);
+		SelectionRule _selectionRule = new SelectionRule() {
+			ParentsPairIterator pairIterator;
+			@Override
+			public ParentsPairIterator iterator(
+					final Population paramInput, final Random rnd) {
+				if (pairIterator != null) {
+					return pairIterator;
+				} else {
+					try {
+						return pairIterator = new ParentsPairIterator() {
+							Population population = (Population) paramInput
+									.clone();
+							int counter = 0;
+
+							@Override
+							public void remove() {
+								// TODO Auto-generated method stub
+							}
+
+							@Override
+							public Chromosome[] next() {
+								Chromosome[] pair = new Chromosome[2];
+								pair[0] = paramInput.getPersons().get(
+										rnd.nextInt(paramInput.getPersons()
+												.size()));
+								pair[1] = paramInput.getPersons().get(
+										rnd.nextInt(paramInput.getPersons()
+												.size()));
+								counter++;
+								return pair;
+							}
+
+							@Override
+							public boolean hasNext() {
+								if (counter >= population.getPersons()
+										.size()) {
+									return false;
+								} else {
+									return true;
+								}
+							}
+						};
+					} catch (CloneNotSupportedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} finally {
+						if (pairIterator != null) {
+							return pairIterator;
+						} else {
+							return null;
+						}
+					}
+				}
+			}
+		};
+
+		UniversalCrossingoverParams1 params = new UniversalCrossingoverParams1(
+				random, _binaryMask, _selectionRule);
+		operator = new UniversalCrossingover().initialize(params);
+		System.out.println(_binaryMask);
+		System.out.println(population);
 		System.out.println(operator.executeOperator(population));
 	} catch (WrongArgumentsExeption e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	}
+	} catch (OperatorNotInitializedException e) {
+		// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

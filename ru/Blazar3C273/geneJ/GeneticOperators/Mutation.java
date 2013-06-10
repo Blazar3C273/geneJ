@@ -13,18 +13,29 @@ import java.util.Random;
 
 import ru.Blazar3C273.geneJ.Chromosome;
 import ru.Blazar3C273.geneJ.GeneticOperator;
+import ru.Blazar3C273.geneJ.GeneticOperatorParams;
 import ru.Blazar3C273.geneJ.Population;
+import ru.Blazar3C273.geneJ.Exeptions.WrongArgumentsExeption;
 import ru.Blazar3C273.geneJ.chromosomes.Gen;
 
 
 /**
  * 
  */
-public class Mutation implements GeneticOperator {
-
+public class Mutation extends GeneticOperator {
+	public static class MutationParams extends GeneticOperatorParams{
+		public Random random;
+		public double oddsRatio;		
+		public MutationParams(Random _inRnd,double _oddsRatio) {
+			super(_inRnd);
+			this.oddsRatio = _oddsRatio;
+			this.random = _inRnd;
+		}
+		
+	}
 	private Random random;
-	private double randomCoef;
-
+	private double oddsRatio;
+	
 	/**
 	 * @param paramArgs int вероятность мутации в хромосоме 0 - 100
 	 * TODO предусмотреть дробный коэф
@@ -36,7 +47,7 @@ public class Mutation implements GeneticOperator {
 		//get params
 		
 		for (Chromosome localChromosome : result.getPersons()) {
-			if (random.nextInt(100)/100 <= randomCoef) {
+			if (random.nextInt(100)/100 <= oddsRatio) {
 				//TODO index warning
 				ArrayList<Gen<?>> localGenom = localChromosome.getGenom();
 				int point = random.nextInt(localGenom.size()-1);
@@ -50,12 +61,15 @@ public class Mutation implements GeneticOperator {
 	}
 
 	@Override
-	public GeneticOperator initialize(Object... params) {
-		// TODO Auto-generated method stub
-		random = (Random) params[0];
-		//TODO exeptions!!!!!
-		randomCoef = (double) params[1];
-		return this;
+	public GeneticOperator initialize(GeneticOperatorParams _inParams) throws WrongArgumentsExeption {
+		if (_inParams.getClass() == MutationParams.class ) {
+			MutationParams localMutationParams = (MutationParams) _inParams;
+			random = _inParams.getRandom();
+			oddsRatio = localMutationParams.oddsRatio;
+			return this;			
+		} else {
+			throw new WrongArgumentsExeption("Current params class is "+_inParams.getClass().getName()+". Need class is MutationParams.");
+		}
 	}
 
 }

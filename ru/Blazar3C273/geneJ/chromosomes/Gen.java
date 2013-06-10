@@ -18,9 +18,14 @@ public abstract class Gen<T> {
 			}
 			return "0";
 		} else {
-		
 		return value.toString();
 		}
+	}
+	
+	@Override
+	public Object clone() {
+		//super.clone();
+		return new Gen<T>() {}.setValue(value);
 	}
 }
 

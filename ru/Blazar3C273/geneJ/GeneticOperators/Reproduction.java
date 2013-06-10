@@ -13,16 +13,27 @@ import java.util.Random;
 
 import ru.Blazar3C273.geneJ.FitnessFunction;
 import ru.Blazar3C273.geneJ.GeneticOperator;
+import ru.Blazar3C273.geneJ.GeneticOperatorParams;
 import ru.Blazar3C273.geneJ.Population;
+import ru.Blazar3C273.geneJ.Exeptions.WrongArgumentsExeption;
 import ru.Blazar3C273.geneJ.FitnessFunctions.Roulette;
+import ru.Blazar3C273.geneJ.FitnessFunctions.Roulette.RouletteIsEmptyExeption;
 
 /**
  * 
  */
-public class Reproduction implements GeneticOperator {
+public class Reproduction extends GeneticOperator {
 
 	private FitnessFunction fitnessFunction;
 	private Random rnd;
+	public static class ReproductionParpms extends GeneticOperatorParams{
+		public FitnessFunction fitnessFunction;
+		public ReproductionParpms(Random _rnd, FitnessFunction _fitnessFunction) {
+			super(_rnd);
+			this.fitnessFunction = _fitnessFunction;
+		}
+		
+	} 
 
 	/* (non-Javadoc)
 	 * @see geneJ.GeneticOperator#executeOperator(geneJ.Population)
@@ -37,15 +48,21 @@ public class Reproduction implements GeneticOperator {
 				result.calculateFitness(fitnessFunction);
 			}
 			Arrays.sort(result.getPersons().toArray());
-			int rouletteIteration = result.getPersons().size()/2;
+			int rouletteIteration = result.getPersons().size()/3;
 			Roulette roulette = new Roulette(rnd,result);
-			result.getPersons().clear();
+			result = new Population();
 			for (int i = 0; i < rouletteIteration; i++) {
 				result.getPersons().add(roulette.rotate());
 			}
 			result.isFitnessChanged = true;
 			result.generationCount++;
 		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (WrongArgumentsExeption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RouletteIsEmptyExeption e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -57,12 +74,15 @@ public class Reproduction implements GeneticOperator {
 	 * @see geneJ.GeneticOperator#initialize(java.lang.Object[])
 	 */
 	@Override
-	public GeneticOperator initialize(Object... paramParams) {
-		// TODO в этом методе выполняется в частности проверка аргументов на соответствие. подумать как унифицировать эту проверку. 
-		//возможно я неправильно передаю параметры в метод
-		rnd = (Random) paramParams[0];
-		fitnessFunction = (FitnessFunction) paramParams[1];
-		return this;
+	public GeneticOperator initialize(GeneticOperatorParams _inParams) throws WrongArgumentsExeption {
+		if (_inParams.getClass() == ReproductionParpms.class) {
+			ReproductionParpms _inParamsLocal = (ReproductionParpms) _inParams;
+			rnd = _inParams.getRandom();
+			fitnessFunction =  _inParamsLocal.fitnessFunction;
+			return this;			
+		} else {
+			throw new WrongArgumentsExeption("Parametrs class is "+_inParams.getClass().getName() + ". Need class is ReproductionParpms");
+		}
 	}
 
 }

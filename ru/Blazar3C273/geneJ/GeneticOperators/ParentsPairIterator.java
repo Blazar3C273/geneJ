@@ -9,9 +9,12 @@ package ru.Blazar3C273.geneJ.GeneticOperators;
 
 import java.util.Iterator;
 
+import ru.Blazar3C273.geneJ.Chromosome;
+import ru.Blazar3C273.geneJ.Population;
+
 /**
  * 
  */
-public interface ParentsPairIterator extends Iterator<E> {
+public interface ParentsPairIterator extends Iterator<Chromosome[]> {
 
 }

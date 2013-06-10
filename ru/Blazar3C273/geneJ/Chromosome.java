@@ -19,7 +19,6 @@ import ru.Blazar3C273.geneJ.chromosomes.Gen;
  */
 public abstract class Chromosome implements Fitnessable  {
 	private ArrayList<Gen<?>> genom;
-	//protected Comparable<? extends Comparable<?>> fitnessValue;
 	public boolean fitnessIsMeasured = false;
 	
 	public Chromosome() {

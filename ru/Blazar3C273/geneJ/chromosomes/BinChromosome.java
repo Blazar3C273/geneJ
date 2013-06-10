@@ -17,34 +17,40 @@ import ru.Blazar3C273.geneJ.FitnessFunction;
 /**
  * 
  */
-public class BinChromosome extends Chromosome implements Comparable<BinChromosome> {
-	
+public class BinChromosome extends Chromosome implements
+		Comparable<BinChromosome> {
+
 	/**
 	 * @param chromosomeSize
-	 * @param random Random value generator
+	 * @param random
+	 *            Random value generator
 	 */
-	public BinChromosome(int chromosomeSize,Random random) {
+	public BinChromosome(int chromosomeSize, Random random) {
 		super(chromosomeSize, random);
 		setGenom(new ArrayList<Gen<?>>());
 		for (int i = 0; i < chromosomeSize; i++) {
-			Gen<Boolean> tmp = new Gen<Boolean>(){};
+			Gen<Boolean> tmp = new Gen<Boolean>() {
+			};
 			tmp.setValue(random.nextBoolean());
 			getGenom().add(tmp);
 		}
 	}
+
 	public BinChromosome() {
-	super();
+		super();
 	}
+
 	@Override
-	public ArrayList<Chromosome> generateSomeChromosomes(int paramQuantity,int chromosomValue,
-			Random paramRandom, Chromosome sample) {
-		ArrayList<Chromosome> returnValue = new ArrayList<Chromosome>(paramQuantity);
+	public ArrayList<Chromosome> generateSomeChromosomes(int paramQuantity,
+			int chromosomValue, Random paramRandom, Chromosome sample) {
+		ArrayList<Chromosome> returnValue = new ArrayList<Chromosome>(
+				paramQuantity);
 		for (int i = 0; i < paramQuantity; i++) {
-			returnValue.add(new BinChromosome(chromosomValue,paramRandom));
+			returnValue.add(new BinChromosome(chromosomValue, paramRandom));
 		}
 		return returnValue;
 	}
-	
+
 	@Override
 	public int compareTo(BinChromosome in) {
 		return fitnessValue.compareTo((Integer) in.getFitness());
@@ -57,24 +63,24 @@ public class BinChromosome extends Chromosome implements Comparable<BinChromosom
 	@Override
 	public Comparable<? extends Comparable<?>> calculateMyFitness(
 			FitnessFunction paramOutside_fitness_function) {
-		//TODO if !fitnessIsMeasured { 
-		fitnessValue = (Integer) paramOutside_fitness_function.calculateFitness(this);
+		// TODO if !fitnessIsMeasured {
+		fitnessValue = (Integer) paramOutside_fitness_function
+				.calculateFitness(this);
 		fitnessIsMeasured = true;
 		return fitnessValue;
 	}
 
+	@Override
+	public Comparable<? extends Comparable<?>> getFitness() {
+		// TODO Auto-generated method stub
+		return fitnessValue;
+	}
 
-Integer fitnessValue;
+	Integer fitnessValue;
+	public static final Gen<Boolean> TRUE_GEN = (Gen<Boolean>) new Gen<Boolean>() {
+	}.setValue(true);
+	public static final Gen<Boolean> FALSE_GEN = (Gen<Boolean>) new Gen<Boolean>() {
+	}.setValue(false);
 
-
-
-
-
-@Override
-public Comparable<? extends Comparable<?>> getFitness() {
-	// TODO Auto-generated method stub
-	return fitnessValue;
-}
-	
 
 }

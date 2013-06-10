@@ -77,8 +77,12 @@ public class Population {
 	}
 	@Override
 	public Object clone() throws CloneNotSupportedException {
-		//super.clone();
-		Population ret = new Population(persons);
+
+		Population ret = new Population();
+		ret.persons = new ArrayList<Chromosome>();
+		for (Chromosome iterable : persons) {
+			ret.persons.add((Chromosome) iterable.clone());
+		}
 		ret.generationCount = generationCount;
 		ret.isFitnessChanged = isFitnessChanged;
 		return ret;
