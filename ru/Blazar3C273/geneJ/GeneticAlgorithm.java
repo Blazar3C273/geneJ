@@ -12,13 +12,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
+import ru.Blazar3C273.geneJ.Chromosomes.IntChromosome;
 import ru.Blazar3C273.geneJ.Exeptions.OperatorNotInitializedException;
 import ru.Blazar3C273.geneJ.Exeptions.WrongArgumentsExeption;
 import ru.Blazar3C273.geneJ.FitnessFunctions.SympleSumFitness;
 import ru.Blazar3C273.geneJ.GeneticOperators.Mutation;
 import ru.Blazar3C273.geneJ.GeneticOperators.NPointsCrossingover;
 import ru.Blazar3C273.geneJ.GeneticOperators.Reproduction;
-import ru.Blazar3C273.geneJ.chromosomes.IntChromosome;
 
 /**
  * 

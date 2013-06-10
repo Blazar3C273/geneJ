@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import ru.Blazar3C273.geneJ.Chromosome;
 import ru.Blazar3C273.geneJ.FitnessFunction;
 import ru.Blazar3C273.geneJ.Fitnessable;
-import ru.Blazar3C273.geneJ.chromosomes.Gen;
-import ru.Blazar3C273.geneJ.chromosomes.IntChromosome;
+import ru.Blazar3C273.geneJ.Chromosomes.Gen;
+import ru.Blazar3C273.geneJ.Chromosomes.IntChromosome;
 
 
 /**

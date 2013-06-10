@@ -1,4 +1,4 @@
-package ru.Blazar3C273.geneJ.chromosomes;
+package ru.Blazar3C273.geneJ.Chromosomes;
 
 public abstract class Gen<T> {
 	public T value;

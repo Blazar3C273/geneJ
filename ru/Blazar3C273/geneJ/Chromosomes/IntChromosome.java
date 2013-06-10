@@ -1,4 +1,4 @@
-package ru.Blazar3C273.geneJ.chromosomes;
+package ru.Blazar3C273.geneJ.Chromosomes;
 
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import ru.Blazar3C273.geneJ.FitnessFunction;
 /**
  * @author Stepanenko Anatoliy
  * Lab1EvM&GA
- * 14:55:06
+ * 14:46:35
  * 04.04.2013
  * TODO
  */
@@ -18,45 +18,36 @@ import ru.Blazar3C273.geneJ.FitnessFunction;
 /**
  * 
  */
-public class VectorChromosome extends Chromosome implements Comparable<VectorChromosome> {
-
-	/**
-	 * @param <T>
-	 *            Hromosome Constructor
-	 * @param paramChromosomeSize
-	 * @param paramRandom
-	 */
-	public VectorChromosome(int paramChromosomeSize, Random paramRandom,
-			Chromosome inChromosomeSample) {
+public class IntChromosome extends  Chromosome implements Comparable<IntChromosome>  {
+	public IntChromosome(int paramChromosomeSize, Random paramRandom) {
 		super(paramChromosomeSize, paramRandom);
-		setGenom(new ArrayList<Gen<?>>());
+		setGenom(new ArrayList<Gen<?>>(paramChromosomeSize));
 		for (int i = 0; i < paramChromosomeSize; i++) {
-			Gen<Chromosome> gen = new Gen<Chromosome>(){};
-			gen.setValue(inChromosomeSample.generateSomeChromosomes(1, paramChromosomeSize, paramRandom, inChromosomeSample).get(0));
-			getGenom().add(gen);
+			Gen<Integer> tmp = new Gen<Integer>() {
+			};
+			tmp.setValue(paramRandom.nextInt(1000));
+			getGenom().add(tmp);
 		}
-
 	}
 
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return "Vector chromosome \n" + super.toString();
+	public IntChromosome() {
+		super();
 	}
 
 	@Override
 	public ArrayList<Chromosome> generateSomeChromosomes(int paramQuantity,
-			int paramChromosomeValue, Random paramRandom, Chromosome sample) {
+			int chromosomeValue, Random paramRandom, Chromosome sample) {
 		ArrayList<Chromosome> returnValue = new ArrayList<Chromosome>(
 				paramQuantity);
-		returnValue.addAll(sample.generateSomeChromosomes(paramQuantity,
-				paramChromosomeValue, paramRandom, sample));
+		for (int i = 0; i < paramQuantity; i++) {
+			returnValue.add(new IntChromosome(chromosomeValue, paramRandom));
+		}
 		return returnValue;
-
 	}
 
+
 	@Override
-	public int compareTo(VectorChromosome in) {
+	public int compareTo(IntChromosome in) {
 		return fitnessValue.compareTo((Integer) in.getFitness());
 	}
 
@@ -78,8 +69,13 @@ public class VectorChromosome extends Chromosome implements Comparable<VectorChr
 
 Integer fitnessValue;
 
+
+
+
+
 @Override
 public Comparable<? extends Comparable<?>> getFitness() {
+	// TODO Auto-generated method stub
 	return fitnessValue;
 }
 }

@@ -7,9 +7,9 @@ import java.util.Scanner;
 import ru.Blazar3C273.geneJ.Chromosome;
 import ru.Blazar3C273.geneJ.Population;
 import ru.Blazar3C273.geneJ.PopulationFactory;
-import ru.Blazar3C273.geneJ.chromosomes.BinChromosome;
-import ru.Blazar3C273.geneJ.chromosomes.IntChromosome;
-import ru.Blazar3C273.geneJ.chromosomes.VectorChromosome;
+import ru.Blazar3C273.geneJ.Chromosomes.BinChromosome;
+import ru.Blazar3C273.geneJ.Chromosomes.IntChromosome;
+import ru.Blazar3C273.geneJ.Chromosomes.VectorChromosome;
 
 /**
  * @author Stepanenko Anatoliy

@@ -3,7 +3,7 @@ package ru.Blazar3C273.geneJ;
 import java.util.ArrayList;
 import java.util.Random;
 
-import ru.Blazar3C273.geneJ.chromosomes.Gen;
+import ru.Blazar3C273.geneJ.Chromosomes.Gen;
 
 
 /**

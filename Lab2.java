@@ -5,6 +5,9 @@ import ru.Blazar3C273.geneJ.Chromosome;
 import ru.Blazar3C273.geneJ.GeneticOperator;
 import ru.Blazar3C273.geneJ.Population;
 import ru.Blazar3C273.geneJ.PopulationFactory;
+import ru.Blazar3C273.geneJ.Chromosomes.BinChromosome;
+import ru.Blazar3C273.geneJ.Chromosomes.Gen;
+import ru.Blazar3C273.geneJ.Chromosomes.IntChromosome;
 import ru.Blazar3C273.geneJ.Exeptions.OperatorNotInitializedException;
 import ru.Blazar3C273.geneJ.Exeptions.WrongArgumentsExeption;
 import ru.Blazar3C273.geneJ.GeneticOperators.NPointsCrossingover;
@@ -13,9 +16,6 @@ import ru.Blazar3C273.geneJ.GeneticOperators.SelectionRule;
 import ru.Blazar3C273.geneJ.GeneticOperators.UniversalCrossingover;
 import ru.Blazar3C273.geneJ.GeneticOperators.UniversalCrossingover.UniversalCrossingoverParams1;
 import ru.Blazar3C273.geneJ.GeneticOperators.UniversalCrossingover.UniversalCrossingoverParams2;
-import ru.Blazar3C273.geneJ.chromosomes.BinChromosome;
-import ru.Blazar3C273.geneJ.chromosomes.Gen;
-import ru.Blazar3C273.geneJ.chromosomes.IntChromosome;
 
 /**
  * @author Stepanenko Anatoliy

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-import ru.Blazar3C273.geneJ.chromosomes.BinChromosome;
-import ru.Blazar3C273.geneJ.chromosomes.IntChromosome;
-import ru.Blazar3C273.geneJ.chromosomes.VectorChromosome;
+import ru.Blazar3C273.geneJ.Chromosomes.BinChromosome;
+import ru.Blazar3C273.geneJ.Chromosomes.IntChromosome;
+import ru.Blazar3C273.geneJ.Chromosomes.VectorChromosome;
 
 
 /**

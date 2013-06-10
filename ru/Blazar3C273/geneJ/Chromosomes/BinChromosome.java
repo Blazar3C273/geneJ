@@ -1,4 +1,4 @@
-package ru.Blazar3C273.geneJ.chromosomes;
+package ru.Blazar3C273.geneJ.Chromosomes;
 
 import java.util.ArrayList;
 import java.util.Random;

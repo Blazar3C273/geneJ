@@ -8,8 +8,8 @@ import ru.Blazar3C273.geneJ.Chromosome;
 import ru.Blazar3C273.geneJ.GeneticOperator;
 import ru.Blazar3C273.geneJ.GeneticOperatorParams;
 import ru.Blazar3C273.geneJ.Population;
+import ru.Blazar3C273.geneJ.Chromosomes.Gen;
 import ru.Blazar3C273.geneJ.Exeptions.WrongArgumentsExeption;
-import ru.Blazar3C273.geneJ.chromosomes.Gen;
 
 /**
  * @author Stepanenko Anatoliy
